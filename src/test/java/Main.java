@@ -9,5 +9,6 @@ public class Main {
         System.setProperty("webdriver.chrome.driver","resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.google.com");
+        driver.close();
     }
 }
