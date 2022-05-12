@@ -21,16 +21,15 @@ public class LoginTest {
 
     @Test
     public void loginWithValidCredentialsTest() {
-        driver.findElement(By.cssSelector("#header > div > div.skip-links > div > a > span.label")).click();
+        driver.findElement(By.cssSelector(".skip-account .label")).click();
 //        WebElement accountLink = driver.findElement(By.cssSelector("#header > div > div.skip-links > div > a > span.label"));
 //        accountLink.click();
-        driver.findElement(By.cssSelector("#header-account > div > ul > li.last > a")).click();
+        driver.findElement(By.cssSelector("a[title='Log In']")).click();
         driver.findElement(By.id("email")).sendKeys("cosmin@fasttrackit.org");
         driver.findElement(By.id("pass")).sendKeys("123456");
-        driver.findElement(By.cssSelector("#send2 > span > span")).click();
-        WebElement dashboardTextElement = driver.findElement(By.cssSelector("body > div > div.page > div.main-container.col2-left-layout > div > div.col-main > div.my-account > div > div.page-title > h1"));
-
-        String textFromElement = driver.findElement(By.cssSelector("body > div > div.page > div.main-container.col2-left-layout > div > div.col-main > div.my-account > div > div.welcome-msg > p.hello > strong")).getText();
+        driver.findElement(By.id("send2")).click();
+        WebElement dashboardTextElement = driver.findElement(By.cssSelector(".page-title h1"));
+        String textFromElement = driver.findElement(By.cssSelector(".hello strong")).getText();
         Assert.assertTrue(dashboardTextElement.isDisplayed());
         Assert.assertEquals("Hello, Cosmin Fast!",textFromElement);
     }
