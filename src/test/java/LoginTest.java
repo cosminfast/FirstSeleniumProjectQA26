@@ -38,10 +38,26 @@ public class LoginTest {
         Assert.assertTrue(dashboardTextElement.isDisplayed());
         Assert.assertEquals("Hello, Cosmin Fast!",textFromElement);
         driver.switchTo().alert().accept();
+
+        String allProductsText = driver.findElement(By.cssSelector(".products-grid.first")).getText();
+        Assert.assertTrue(allProductsText.contains("SILVER DESERT NECKLACE"));
+
+
+        List<WebElement> listOfProducts = driver.findElements(By.cssSelector(".products-grid .product-name"));
+
+        boolean found= false;
+        for (WebElement element : listOfProducts){
+            if (element.getText().equals("SILVER DESERT NECKLACE")){
+                found=true;
+                break;
+            }
+        }
+        Assert.assertTrue("Product was not found in the list!",found);
     }
 
     @Test
     public void loginWithInvalidPasswordTest() {
+
         driver.findElement(By.cssSelector("#header > div > div.skip-links > div > a > span.label")).click();
 //        WebElement accountLink = driver.findElement(By.cssSelector("#header > div > div.skip-links > div > a > span.label"));
 //        accountLink.click();
