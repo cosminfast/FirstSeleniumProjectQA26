@@ -1,6 +1,8 @@
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,14 +23,17 @@ public class RegisterTest {
 //        String qty = driver.findElement(By.cssSelector(".qty")).getAttribute("value");
 
 
-//       WebElement womenCategory = driver.findElement(By.cssSelector(".level0 > a[href*='women']"));
-//        Actions actions = new Actions(driver);
-//        actions.moveToElement(womenCategory).perform();
+       WebElement womenCategory = driver.findElement(By.cssSelector(".level0 > a[href*='women']"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(womenCategory).perform();
+
 
         WebElement element = driver.findElement(By.id("select-language"));
         Select selectLanguage = new Select(element);
         selectLanguage.selectByVisibleText("German");
         wait(1500);
+
+        Assert.assertTrue(driver.findElement(By.cssSelector("#search.required-entry.validation-failed")).isDisplayed());
 
     }
 
