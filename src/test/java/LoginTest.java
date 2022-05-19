@@ -1,11 +1,16 @@
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.List;
+import java.util.Random;
 
 public class LoginTest {
     private WebDriver driver;
@@ -32,6 +37,7 @@ public class LoginTest {
         String textFromElement = driver.findElement(By.cssSelector(".hello strong")).getText();
         Assert.assertTrue(dashboardTextElement.isDisplayed());
         Assert.assertEquals("Hello, Cosmin Fast!",textFromElement);
+        driver.switchTo().alert().accept();
     }
 
     @Test
@@ -67,6 +73,28 @@ public class LoginTest {
         driver.findElement(By.cssSelector("#header-account > div > ul > li.last > a")).click();
         driver.findElement(By.cssSelector("#send2 > span > span")).click();
     }
+
+    @Test
+    public void loginWithBlankEmailTest() {
+        driver.findElement(By.cssSelector("#header > div > div.skip-links > div > a > span.label")).click();
+        driver.findElement(By.cssSelector("#header-account > div > ul > li.last > a")).click();
+        driver.findElement(By.id("pass")).sendKeys("121233456");
+        driver.findElement(By.cssSelector("#send2 > span > span")).click();
+
+    }
+
+
+    @Test
+    public void loginWithBlankPasswordTest() {
+        driver.findElement(By.cssSelector("#header > div > div.skip-links > div > a > span.label")).click();
+        driver.findElement(By.cssSelector("#header-account > div > ul > li.last > a")).click();
+        driver.findElement(By.id("email")).sendKeys("");
+        driver.findElement(By.cssSelector("#send2 > span > span")).click();
+
+
+    }
+
+
 
     @After
     public void close() {
